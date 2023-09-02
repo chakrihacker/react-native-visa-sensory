@@ -1,12 +1,19 @@
 import * as React from 'react';
 
-import { StyleSheet, View } from 'react-native';
-import { VisaSensoryView } from 'react-native-visa-sensory';
+import { StyleSheet, View, Button } from 'react-native';
+import { VisaView } from 'react-native-visa-sensory';
 
 export default function App() {
+  const ref = React.useRef<any>();
+
+  const startAnimation = () => {
+    ref.current.startAnimation();
+  };
+
   return (
     <View style={styles.container}>
-      <VisaSensoryView color="#32a852" style={styles.box} />
+      <VisaView color="#32a852" style={styles.box} ref={ref} />
+      <Button title={'Start'} onPress={startAnimation} />
     </View>
   );
 }

@@ -1,3 +1,5 @@
+import VisaSensoryBranding
+
 @objc(VisaSensoryViewManager)
 class VisaSensoryViewManager: RCTViewManager {
 
@@ -6,16 +8,37 @@ class VisaSensoryViewManager: RCTViewManager {
   }
 
   @objc override static func requiresMainQueueSetup() -> Bool {
-    return false
+    return true
+  }
+  
+  @objc
+  final func startAnimation(_ node: NSNumber) {
+    let component = self.bridge.uiManager.view(forReactTag: node) as! VisaSensoryView
+    component.startAnimation()
   }
 }
 
 class VisaSensoryView : UIView {
-
+  var sensoryBranding: SensoryBranding
+  
+  override init(frame: CGRect) {
+    sensoryBranding = SensoryBranding.init()
+    super.init(frame: frame)
+    addSubview(sensoryBranding)
+  }
+  
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   @objc var color: String = "" {
     didSet {
       self.backgroundColor = hexStringToUIColor(hexColor: color)
     }
+  }
+  
+  func startAnimation() {
+    sensoryBranding.animate()
   }
 
   func hexStringToUIColor(hexColor: String) -> UIColor {
