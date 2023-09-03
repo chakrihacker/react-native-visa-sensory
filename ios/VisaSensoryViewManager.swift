@@ -12,9 +12,11 @@ class VisaSensoryViewManager: RCTViewManager {
   }
   
   @objc
-  final func startAnimation(_ node: NSNumber) {
-    let component = self.bridge.uiManager.view(forReactTag: node) as! VisaSensoryView
-    component.startAnimation()
+  final func animate(_ node: NSNumber, resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    DispatchQueue.main.async {
+      let component = self.bridge.uiManager.view(forReactTag: node) as! VisaSensoryView
+      component.startAnimation(resolve: resolve, reject: reject)
+    }
   }
 }
 
@@ -37,8 +39,15 @@ class VisaSensoryView : UIView {
     }
   }
   
-  func startAnimation() {
-    sensoryBranding.animate()
+  func startAnimation(resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+    sensoryBranding.animate { result, err in
+      if((err) != nil) {
+        reject(err.debugDescription, err?.localizedDescription, err)
+      }
+      if(result) {
+        resolve(result)
+      }
+    }
   }
 
   func hexStringToUIColor(hexColor: String) -> UIColor {

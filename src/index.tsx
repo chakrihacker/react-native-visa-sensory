@@ -6,7 +6,6 @@ import {
   Platform,
   NativeModules,
   findNodeHandle,
-  ViewStyle,
 } from 'react-native';
 
 const LINKING_ERROR =
@@ -53,8 +52,8 @@ export class VisaView extends PureComponent<VisaProps> {
     return nodeHandle;
   }
 
-  public startAnimation = () => {
-    VisaViewModule.startAnimation(this.handle);
+  public startAnimation = async () => {
+    return await VisaViewModule.animate(this.handle);
   };
 
   render(): ReactNode {

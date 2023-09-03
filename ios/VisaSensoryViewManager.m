@@ -3,8 +3,9 @@
 @interface RCT_EXTERN_REMAP_MODULE(VisaSensory, VisaSensoryViewManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(color, NSString)
-RCT_EXTERN_METHOD(startAnimation
-                  : (nonnull NSNumber*)node nodeHandle)
+RCT_EXTERN_METHOD(animate: (nonnull NSNumber*)node
+                  resolve : (RCTPromiseResolveBlock) resolve
+                  reject : (RCTPromiseRejectBlock) reject)
 
 @end
 	

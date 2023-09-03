@@ -6,8 +6,13 @@ import { VisaView } from 'react-native-visa-sensory';
 export default function App() {
   const ref = React.useRef<any>();
 
-  const startAnimation = () => {
-    ref.current.startAnimation();
+  const startAnimation = async () => {
+    try {
+      const result = await ref.current.startAnimation();
+      console.log({ result });
+    } catch (error) {
+      console.log({ error });
+    }
   };
 
   return (
