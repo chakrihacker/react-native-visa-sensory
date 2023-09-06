@@ -1,5 +1,5 @@
 import React, { PureComponent, createRef, type ReactNode } from 'react';
-import type { NativeMethods, ViewProps, ColorValue } from 'react-native';
+import type { NativeMethods, ViewProps } from 'react-native';
 import {
   requireNativeComponent,
   UIManager,
@@ -26,7 +26,9 @@ const NativeVisaSensoryView =
       };
 
 interface VisaProps extends ViewProps {
-  backdropColor: ColorValue;
+  isSoundEnabled?: boolean;
+  isHapticFeedbackEnabled?: boolean;
+  checkmarkMode?: 'checkmark' | 'checkmarkWithText' | 'none';
 }
 
 type RefType = React.Component<VisaProps> & Readonly<NativeMethods>;

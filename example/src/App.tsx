@@ -17,7 +17,13 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <VisaView color="#32a852" style={styles.box} ref={ref} />
+      <VisaView
+        style={styles.box}
+        isSoundEnabled={false}
+        isHapticFeedbackEnabled={false}
+        checkmarkMode={'none'}
+        ref={ref}
+      />
       <Button title={'Start'} onPress={startAnimation} />
     </View>
   );
